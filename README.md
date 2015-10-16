@@ -8,8 +8,18 @@
 
 ## 库介绍
 
+###support design
+
 - CoordinatorLayout
 - AppBarLayout
 - TabLayout
 - FloatingActionButton
 - NavigationView
+- Snackbar
+- SwipeRefreshLayout
+- TextInputLayout
+- AppCompatSpinner
+- SwitchCompat
+
+###v7 cardview library
+- CardView

@@ -1,5 +1,6 @@
 package com.android.materialdesignshared.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -11,9 +12,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.android.materialdesignshared.R;
 import com.android.materialdesignshared.fragment.MainPagerAdapter;
@@ -30,6 +34,8 @@ public class MainActivity extends AppCompatActivity
     TabLayout tabsTitle;
     @InjectView(R.id.viewpager)
     ViewPager viewpager;
+    @InjectView(R.id.fab_menu)
+    FloatingActionButton fabMenu;
     @InjectView(R.id.nav_view)
     NavigationView navView;
     @InjectView(R.id.drawer_layout)
@@ -38,7 +44,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
         initView();
@@ -46,14 +51,13 @@ public class MainActivity extends AppCompatActivity
 
     private void initView() {
         setSupportActionBar(toolbar);
-//        fabMenu.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
+        fabMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show();
+            }
+        });
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -65,6 +69,25 @@ public class MainActivity extends AppCompatActivity
         viewpager.setOffscreenPageLimit(MainPagerAdapter.NUM_ITEMS);
         // Setup tab layout
         tabsTitle.setupWithViewPager(viewpager);
+        //设置文本在选中和未选中时候的颜色
+        tabsTitle.setTabTextColors(Color.WHITE, Color.GRAY);
+        tabsTitle.setTabGravity(TabLayout.GRAVITY_CENTER);
+        tabsTitle.setTabMode(TabLayout.MODE_SCROLLABLE);
+
+        TextView textView = new TextView(this);
+        TabLayout.LayoutParams params=new TabLayout.LayoutParams(TabLayout.LayoutParams.MATCH_PARENT, TabLayout.LayoutParams.MATCH_PARENT);
+        params.gravity= Gravity.LEFT;
+        textView.setLayoutParams(params);
+        textView.setText("第二个");
+
+        tabsTitle.addTab(tabsTitle.newTab().setText("第一个"), false);//添加 Tab,默认选中
+        tabsTitle.addTab(tabsTitle.newTab().setText("第一个"), false);//添加 Tab,默认选中
+        tabsTitle.addTab(tabsTitle.newTab().setText("第一个"), false);//添加 Tab,默认选中
+        tabsTitle.addTab(tabsTitle.newTab().setText("第一个"), false);//添加 Tab,默认选中
+        tabsTitle.addTab(tabsTitle.newTab().setText("第一个"), false);//添加 Tab,默认选中
+        tabsTitle.addTab(tabsTitle.newTab().setText("第一个"), false);//添加 Tab,默认选中
+        tabsTitle.addTab(tabsTitle.newTab().setCustomView(textView), false);//添加 Tab,默认选中
+
     }
     
     @Override
