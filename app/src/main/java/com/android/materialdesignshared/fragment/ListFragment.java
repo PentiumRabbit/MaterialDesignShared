@@ -2,7 +2,9 @@ package com.android.materialdesignshared.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -21,11 +23,13 @@ import butterknife.InjectView;
  * Use the {@link ListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ListFragment extends Fragment {
+public class ListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     @InjectView(R.id.rv_list)
     RecyclerView rvList;
+    @InjectView(R.id.srl_refresh)
+    SwipeRefreshLayout srlRefresh;
 
     private String mParam1;
     private String mParam2;
@@ -57,6 +61,12 @@ public class ListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         ButterKnife.inject(this, view);
+        srlRefresh.setOnRefreshListener(this);
+        srlRefresh.setColorSchemeResources(
+                R.color.Tomato,
+                R.color.Yellow,
+                R.color.Turquoise,
+                R.color.Teal);
         return view;
     }
 
@@ -91,5 +101,15 @@ public class ListFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+    }
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                srlRefresh.setRefreshing(false);
+            }
+        },3000);
     }
 }

@@ -8,18 +8,28 @@
 
 ## 库介绍
 
-###support design
+### support design
 
 - CoordinatorLayout
 - AppBarLayout
 - TabLayout
 - FloatingActionButton
 - NavigationView
-- Snackbar
+- Snackbar *(Toast的替代品)*
 - SwipeRefreshLayout
 - TextInputLayout
 - AppCompatSpinner
 - SwitchCompat
 
-###v7 cardview library
+
+###V7 support appcompat
+- RecyclerView
+	* RecyclerView.LayoutManager
+        1. StaggeredGridLayoutManager
+        2. LinearLayoutManager
+            + GridLayoutManager
+- Toolbar
+
+###V7 cardview library
 - CardView
+
