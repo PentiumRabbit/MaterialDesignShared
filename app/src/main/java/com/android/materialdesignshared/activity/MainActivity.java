@@ -1,5 +1,6 @@
 package com.android.materialdesignshared.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -129,7 +130,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         
         if (id == R.id.nav_camara) {
-            // Handle the camera action
+            startActivity(new Intent(this,ToolbarCollapseActivity.class));
         } else if (id == R.id.nav_gallery) {
             
         } else if (id == R.id.nav_slideshow) {
