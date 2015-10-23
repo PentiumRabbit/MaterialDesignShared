@@ -1,4 +1,4 @@
-# MaterialDesignShared
+# Material Design
 材料设计分享，学习
 
 [TOC]
@@ -48,7 +48,7 @@
 - app:layout_anchorGravity - 设置FAB相对锚点的位置，值有 bottom、center、right、left、top等。
 
 #### NavigationView
-#### Snackbar
+#### Snackbar(Toast 增强型)
 
 - Snackbar 和 Toast 有着相同的概念，但是不同于 Toast，它的表现是作为 UI 的一部分而不是覆盖在屏幕上。
 
@@ -113,7 +113,7 @@
 - ListView 类也是和 CoordinatorLayout 不能协同工作的。只有RecyclerView可以
 
 ###V7 support appcompat
-- RecyclerView
+- RecyclerView ListView的升级版
 	* RecyclerView.LayoutManager
         1. StaggeredGridLayoutManager
         2. LinearLayoutManager
@@ -122,8 +122,93 @@
 
 ###V7 cardview library
 - CardView
+	* CardView继承自FrameLayout，允许你在card视图中显示信息. CardView也可以设置阴影和圆角。
+	* Layout中为CardView设置圆角使用card_view:cardCornerRadius属性
+
+	* 代码中为CardView设置圆角使用CardView.setRadius方法
+
+	* 为CardView设置背景颜色使用card\_view:cardBackgroundColor属性
+	```xml
+    <!-- A CardView that contains a TextView -->
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        card_view:cardCornerRadius="4dp">
+
+        <TextView
+            android:id="@+id/info_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v7.widget.CardView>
+	```
+
+### 动画(新增的)
+
+#### Touch feedback（触摸反馈）
+波纹效果（Ripple）:
+android:background="?android:attr/selectableItemBackground"波纹有边界
+android:background="?android:attr/selectableItemBackgroundBorderless"波纹超出边界
+颜色 :
+android:colorControlHighlight：设置波纹颜色
+android:colorAccent：设置checkbox等控件的选中颜色
+
+Circular Reveal:新增的动画效果
+
+应用ViewAnimationUtils.createCircularReveal()方法可以去创建一个RevealAnimator动画
+参数:
+- view 操作的视图
+- centerX 动画开始的中心点X
+- centerY 动画开始的中心点Y
+- startRadius 动画开始半径
+- startRadius 动画结束半径
+
+Activity Transition：
+
+Activity Transition提供了两种Transition类型：
+Enter（进入）：进入一个Activity的效果
+Exit（退出）：退出一个Activity的效果
+
+而这每种类型又分为普通Transition和共享元素Transition：
+
+- 普通Transition：
+	+ explode：从场景的中心移入或移出
+	+ slide：从场景的边缘移入或移出
+	+ fade：调整透明度产生渐变效果
+
+- Shared Elements Transition 共享元素转换：它的作用就是共享两个acitivity种共同的元素，在Android 5.0下支持如下效果：
+	+ changeBounds -  改变目标视图的布局边界
+	+ changeClipBounds - 裁剪目标视图边界
+	+ changeTransform - 改变目标视图的缩放比例和旋转角度
+	+ changeImageTransform - 改变目标图片的大小和缩放比例
+
+
+Window.setEnterTransition()：普通transition的进入效果
+Window.setExitTransition()：普通transition的退出效果
+Window.setSharedElementEnterTransition()：共享元素transition的进入效果
+Window.setSharedElementExitTransition()：共享元素transition的退出效果
+
+#### Reveal effect（揭露效果）
+
+#### Activity transitions（Activity转换效果）
+#### Curved motion（曲线运动）
+#### View state changes （视图状态改变）
+#### Animate Vector Drawables（可绘矢量动画）
+
 
 ### 参看
 
 > http://www.open-open.com/lib/view/open1436152483833.html
 
+### 资料
+> https://github.com/lightSky/Awesome-MaterialDesign?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io
+
+> [ANDROID L - Material Design详解（主题和布局）](http://http://www.open-open.com/lib/view/open1416664325648.html)
+
+> [ANDROID L - Material Design详解（视图和阴影）](http://www.open-open.com/lib/view/open1416664217867.html)
+
+> [ANDROID L - Material Design详解（UI控件）](http://www.open-open.com/lib/view/open1416664070023.html)
+
+> [ANDROID L - Material Design详解（动画篇）](http://www.open-open.com/lib/view/open1416663769680.html)
