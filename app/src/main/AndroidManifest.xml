@@ -25,6 +25,26 @@
         </activity>
         <activity android:name=".activity.DetailActivity" >
         </activity>
+        <activity
+            android:name=".activity.SharedActivity"
+            android:label="@string/title_activity_activity_transition"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".activity.SharedViewActivity"
+            android:label="@string/title_activity_shared_view"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".activity.ImageSharedActivity"
+            android:label="@string/title_activity_image_shared"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".activity.ViewTransitionActivity"
+            android:label="@string/title_activity_view_transition"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

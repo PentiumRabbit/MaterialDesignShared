@@ -114,10 +114,15 @@
 
 ###V7 support appcompat
 - RecyclerView ListView的升级版
-	* RecyclerView.LayoutManager
+	* RecyclerView.LayoutManager (可以自行定义list的类型)
         1. StaggeredGridLayoutManager
         2. LinearLayoutManager
             + GridLayoutManager
+
+	* RecyclerView.ItemAnimator (可以自行扩展的item动画)
+		1. SimpleItemAnimator
+			+DefaultItemAnimator
+	* 下拉刷新未调查
 - Toolbar
 
 ###V7 cardview library
@@ -189,6 +194,11 @@ Window.setEnterTransition()：普通transition的进入效果
 Window.setExitTransition()：普通transition的退出效果
 Window.setSharedElementEnterTransition()：共享元素transition的进入效果
 Window.setSharedElementExitTransition()：共享元素transition的退出效果
+在setContentView之前
+
+//不同activity之间共享view,接收端
+setTransitionName
+transitionName
 
 #### Reveal effect（揭露效果）
 

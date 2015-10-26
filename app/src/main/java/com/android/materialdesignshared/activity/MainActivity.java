@@ -13,12 +13,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.android.materialdesignshared.R;
 import com.android.materialdesignshared.fragment.MainPagerAdapter;
@@ -74,20 +71,7 @@ public class MainActivity extends AppCompatActivity
         tabsTitle.setTabTextColors(Color.WHITE, Color.GRAY);
         tabsTitle.setTabGravity(TabLayout.GRAVITY_CENTER);
         tabsTitle.setTabMode(TabLayout.MODE_SCROLLABLE);
-
-        TextView textView = new TextView(this);
-        TabLayout.LayoutParams params=new TabLayout.LayoutParams(TabLayout.LayoutParams.MATCH_PARENT, TabLayout.LayoutParams.MATCH_PARENT);
-        params.gravity= Gravity.LEFT;
-        textView.setLayoutParams(params);
-        textView.setText("第二个");
-
         tabsTitle.addTab(tabsTitle.newTab().setText("第一个"), false);//添加 Tab,默认选中
-        tabsTitle.addTab(tabsTitle.newTab().setText("第一个"), false);//添加 Tab,默认选中
-        tabsTitle.addTab(tabsTitle.newTab().setText("第一个"), false);//添加 Tab,默认选中
-        tabsTitle.addTab(tabsTitle.newTab().setText("第一个"), false);//添加 Tab,默认选中
-        tabsTitle.addTab(tabsTitle.newTab().setText("第一个"), false);//添加 Tab,默认选中
-        tabsTitle.addTab(tabsTitle.newTab().setText("第一个"), false);//添加 Tab,默认选中
-        tabsTitle.addTab(tabsTitle.newTab().setCustomView(textView), false);//添加 Tab,默认选中
 
     }
     
@@ -132,7 +116,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camara) {
             startActivity(new Intent(this,ToolbarCollapseActivity.class));
         } else if (id == R.id.nav_gallery) {
-            
+            startActivity(new Intent(this,SharedActivity.class));
         } else if (id == R.id.nav_slideshow) {
             
         } else if (id == R.id.nav_manage) {

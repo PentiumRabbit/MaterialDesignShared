@@ -2,6 +2,7 @@ package com.android.materialdesignshared.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import com.android.materialdesignshared.R;
 
 public class DetailActivity extends AppCompatActivity {
 
