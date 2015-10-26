@@ -9,11 +9,11 @@
         <item
             android:id="@+id/nav_gallery"
             android:icon="@android:drawable/ic_menu_gallery"
-            android:title="Activity切换"/>
+            android:title="view共享"/>
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="Slideshow"/>
+            android:title="activity切换"/>
         <item
             android:id="@+id/nav_manage"
             android:icon="@android:drawable/ic_menu_manage"

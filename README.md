@@ -170,7 +170,7 @@ Circular Reveal:新增的动画效果
 - startRadius 动画开始半径
 - startRadius 动画结束半径
 
-Activity Transition：
+Activity Transition：(API19)
 
 Activity Transition提供了两种Transition类型：
 Enter（进入）：进入一个Activity的效果

@@ -86,9 +86,7 @@ public class SharedActivity extends AppCompatActivity implements AdapterView.OnI
             Intent intent = new Intent(this, ImageSharedActivity.class);
             intent.putExtra("pos", images[position]);
             startActivity(intent, bundle);
-
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, view, "fab_button");
-
+//            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, view, "fab_button");
         } else {
             // 小于L版本的,正常启动
         }

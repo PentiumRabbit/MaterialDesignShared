@@ -39,7 +39,7 @@ public class ImageSharedActivity extends AppCompatActivity {
             // inside your activity (if you did not enable transitions in your theme)
             getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
             // set an enter transition
-//            getWindow().setEnterTransition(new Explode());
+            getWindow().setEnterTransition(new Explode());
             // set an exit transition
 //            getWindow().setExitTransition(new Explode());
         }

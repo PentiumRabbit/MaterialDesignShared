@@ -7,11 +7,14 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="Widget.MaterialSheetFab.TabLayout" parent="">
@@ -33,6 +36,7 @@
     <style name="TextAppearance.MaterialSheetFab.Note.Title" parent="TextAppearance.MaterialSheetFab.Note">
         <item name="android:textSize">17sp</item>
     </style>
+
     <style name="Widget.MaterialSheetFab.Note" parent="">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -42,6 +46,20 @@
         <item name="contentPadding">@dimen/note_content_spacing</item>
         <item name="cardBackgroundColor">@color/background_card</item>
         <item name="cardCornerRadius">@dimen/note_corner_radius</item>
+    </style>
+
+    <style name="ButtonStyle" parent="Base.TextAppearance.AppCompat.Widget.Button">
+        <item name="android:layout_width">260dp</item>
+        <item name="android:layout_height">120dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="ButtonRippleStyle" parent="ButtonStyle">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+    <style name="ButtonRippleLessStyle" parent="ButtonStyle">
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
     </style>
 
 </resources>

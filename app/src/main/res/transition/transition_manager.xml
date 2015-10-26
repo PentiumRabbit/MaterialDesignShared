@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionManager xmlns:android="http://schemas.android.com/apk/res/android">
+    <transition
+        android:fromScene="@layout/activity_main"
+        android:toScene="@layout/activity_view_transition"
+        android:transition="@transition/transition_fade"/>
+
+    <transition
+        android:fromScene="@layout/activity_shared"
+        android:toScene="@layout/activity_shared_view"
+        android:transition="@transition/transition_fade"/>
+</transitionManager>
