@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -55,9 +56,11 @@ public class SharedActivity extends AppCompatActivity implements AdapterView.OnI
             }
         });
 
+        //设置布局管理器
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         // Setup list
-        rvList.setLayoutManager(new StaggeredGridLayoutManager(1,
-                StaggeredGridLayoutManager.VERTICAL));
+        rvList.setLayoutManager(linearLayoutManager);
         imageAdapter = new ImageAdapter(this);
         rvList.setHasFixedSize(true);
         rvList.setItemViewCacheSize(6);
@@ -77,7 +80,8 @@ public class SharedActivity extends AppCompatActivity implements AdapterView.OnI
             // set share element transition animation for current activity
             Transition ts = new ChangeTransform();
             ts.setDuration(3000);
-//            getWindow().setExitTransition(ts);
+            ts.setStartDelay(1000);
+            getWindow().setExitTransition(ts);
             Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(this,
                     Pair.create(view, "pic"),
                     Pair.create((View)fab, "ShareBtn")).toBundle();

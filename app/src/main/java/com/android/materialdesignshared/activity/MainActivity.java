@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
             startActivity(new Intent(this,ViewTransitionActivity.class));
         } else if (id == R.id.nav_manage) {
-            
+            startActivity(new Intent(this,WightActivity.class));
         } else if (id == R.id.nav_share) {
             
         } else if (id == R.id.nav_send) {

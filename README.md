@@ -8,14 +8,18 @@
 
 ## 库介绍
 
-### support design
+### support design (方法数 2126)
 
 
++ EditText
++ Spinner
++ CheckBox
++ RadioButton
++ Switch（使用supportV7中的SwitchCompat，https://developer.android.com/reference/android/support/v7/widget/SwitchCompat.html）
++ CheckedTextView
 
+你不需要做任何特殊的工作，只需像以前一样在你的布局中使用这些控制并且AppCompat会为你做剩下的工作（请看FAQ）。
 
-#### AppBarLayout
-
-- AppBarLayout 是继承自一个垂直的 LinearLayout
 
 #### TabLayout
 
@@ -35,19 +39,74 @@
     * mini是另一个选择，它的大小将变成 40dp
 
 - 按钮的颜色，FAB 基本上使用强调色，重写app:backgroundTint属性来修改
-- app:elevation为空闲状态下的阴影深度(6dp 在空闲状态)
-- andapp:pressedTranslationZ为按下状态的(12dp 是按下状态)
+- app:elevation 为空闲状态下的阴影深度(6dp 在空闲状态)
+- app:pressedTranslationZ为按下状态的(12dp 是按下状态)
 - app:backgroundTint - 设置FAB的背景颜色。
 - app:rippleColor - 设置FAB点击时的背景颜色。
 - app:borderWidth - 该属性尤为重要，如果不设置0dp，那么在4.1的sdk上FAB会显示为正方形，而且在5.0以后的sdk没有阴影效果。所以设置为borderWidth="0dp"。
-- app:elevation - 默认状态下FAB的阴影大小。
-- app:pressedTranslationZ - 点击时候FAB的阴影大小。
-- app:fabSize - 设置FAB的大小，该属性有两个值，分别为normal和mini，对应的FAB大小分别为56dp和40dp。
 - src - 设置FAB的图标，Google建议符合Design设计的该图标大小为24dp。
-- app:layout_anchor - 设置FAB的锚点，即以哪个控件为参照点设置位置。
+
+- app:layout_anchor - 设置FAB的锚点，即以哪个控件为参照点设置位置。(*可以指定不在同一个父类的view*)
 - app:layout_anchorGravity - 设置FAB相对锚点的位置，值有 bottom、center、right、left、top等。
 
+	[Floating Action Buttons的动态处理](https://guides.codepath.com/android/Floating-Action-Buttons)
+
 #### NavigationView
+- Google 提供简单的侧滑样式
+	![NavigationView](http://img0.tuicool.com/BVV3MfM.jpg)
+- 代码也很简单
+```xml
+<android.support.v4.widget.DrawerLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <!-- 需要呈现的内容 -->
+    <android.support.design.widget.NavigationView
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_gravity="start"
+      app:headerLayout="@layout/drawer_header"
+      app:menu="@menu/drawer"/>
+</android.support.v4.widget.DrawerLayout>
+```
+其中 app:headerLayout 用于指定一个任意的布局，作为导航抽屉的顶部，如效果图中的紫色带 Username 字样部分。
+
+- app:menu 用于指定导航抽屉的菜单项，具体代码如下
+
+    ```xml
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+      <group android:checkableBehavior="single">
+        <item
+          android:id="@+id/nav_home"
+          android:icon="@drawable/ic_dashboard"
+          android:title="Home" />
+        <item
+          android:id="@+id/nav_messages"
+          android:icon="@drawable/ic_event"
+          android:title="Messages" />
+        <item
+          android:id="@+id/nav_friends"
+          android:icon="@drawable/ic_headset"
+          android:title="Friends" />
+        <item
+          android:id="@+id/nav_discussion"
+          android:icon="@drawable/ic_forum"
+          android:title="Discussion" />
+      </group>
+      <item android:title="Sub items">
+        <menu>
+          <item
+            android:icon="@drawable/ic_dashboard"
+            android:title="Sub item 1" />
+          <item
+            android:icon="@drawable/ic_forum"
+            android:title="Sub item 2" />
+        </menu>
+      </item>
+    </menu>
+    ```
+
 #### Snackbar(Toast 增强型)
 
 - Snackbar 和 Toast 有着相同的概念，但是不同于 Toast，它的表现是作为 UI 的一部分而不是覆盖在屏幕上。
@@ -63,10 +122,49 @@
          }).show();
 
     ```
+这里的view可以时任意的view,它会根据view去遍历查找根view(Snackbar源代码 Handler写的很奇怪)
 
 - 低于 Android L 的系统上，当 Snackbar 滑动消失的时候，FAB 忘记了移动下来。只需要为低于 Android L 的系统改变 margin 的值为 0.1dp(不好用)
 
 #### SwipeRefreshLayout
+- 下拉圈圈的颜色设置
+
+    ```java
+    srlRefresh.setOnRefreshListener(this);
+    srlRefresh.setColorSchemeResources(
+            R.color.Tomato,
+            R.color.Yellow,
+            R.color.Turquoise,
+            R.color.Teal);
+    @Override
+    public void onRefresh() {
+		// 隐藏
+       srlRefresh.setRefreshing(false);
+
+    }
+
+    ```
+
+- 布局
+
+    ```xml
+    <?xml version="1.0" encoding="utf-8"?>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_refresh"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            />
+    </android.support.v4.widget.SwipeRefreshLayout>
+    ```
+
 #### TextInputLayout
 
 - code
@@ -84,24 +182,52 @@
         </android.support.design.widget.TextInputLayout>
     ```
 
+- 设置错误信息
+    ```java
+       	EditText et_content = tilName.getEditText();
+            tilName.setHint("请输入用户名");
+            tilName.setError("密码输入错啦！");
+            tilName.setErrorEnabled(true);//当设置成false的时候 错误信息不显示 反之显示
+    ```
 
 #### AppCompatSpinner
+- 下拉菜单,替代Spinners,就是风格变成材料设计的了
+- 就没怎么用过,直接略过
+
 #### SwitchCompat
+- 开关按钮
+- 代码
+```xml
+<android.support.v7.widget.SwitchCompat
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textOn="ON"
+    android:textOff="OFF" />
+```
+![开关](http://image.uisdc.com/wp-content/uploads/2014/12/a-8.png)
+
+#### ToolBar
+- 将ToolBar作为ActionBar来使用
+
 #### CollapsingToolbarLayout
 
 - 让 Toolbar 折叠起来
 - Toolbar中不需要 layout_scrollFlags
-	`app:layout_collapseMode="pin"`
+	
     `app:layout_collapseParallaxMultiplier="0.7"` == 设置偏移 ==
-
+    `app:layout_collapseMode="pin"`
     - parallax, 表示滚动过程中,会一直保持可见区域在正中间,配合layout_collapseParallaxMultiplier
     - pin, 表示不会被滚出屏幕范围
     - app:layout_collapseParallaxMultiplier和CollapsingToolbarLayout的app:contentScrim=”?attr/colorPrimary”结合使用，结果就是在视图折叠时，添加了一个纱布效果
 
+
+#### AppBarLayout
+
+- AppBarLayout 是继承自一个垂直的 LinearLayout
+
 #### CoordinatorLayout
 
-- LinearLayout 没有被设计成与 CoordinatorLayout 协同工作,只需在相应的中添加:
-	`app:layout_behavior="@string/appbar_scrolling_view_behavior"`
+- LinearLayout 没有被设计成与 CoordinatorLayout 协同工作
 - Toolbar 添加一个滚动标志,想要 TabLayout 同样从屏幕上消失
 	`app:layout_scrollFlags="scroll|enterAlways"`
     * scroll- 你想你想要设置这个 view 随着内容滚动，你需要应用这个标志。
@@ -112,12 +238,38 @@
 - ScrollView 没有被设计成与 CoordinatorLayout 协同工作,NestedScrollView，Android Support Library v4,替代
 - ListView 类也是和 CoordinatorLayout 不能协同工作的。只有RecyclerView可以
 
-###V7 support appcompat
+- 可以自行定义FloatingActionButton隐藏的动作
+``` java
+public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {
+    // ...
+
+    @Override
+    public void onNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionButton child,
+            View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
+        super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed,
+                dyUnconsumed);
+
+        if (dyConsumed > 0 && child.getVisibility() == View.VISIBLE) {
+            child.hide();
+        } else if (dyConsumed < 0 && child.getVisibility() != View.VISIBLE) {
+            child.show();
+        }
+    }
+
+    // ...
+}
+```
+```xml
+<android.support.design.widget.FloatingActionButton
+    app:layout_behavior="com.codepath.floatingactionbuttontest.ScrollAwareFABBehavior" />
+```
+
+###V7 Recyclerview Lib ( 方法数 2119)
 - RecyclerView ListView的升级版
 	* RecyclerView.LayoutManager (可以自行定义list的类型)
-        1. StaggeredGridLayoutManager
-        2. LinearLayoutManager
-            + GridLayoutManager
+        1. StaggeredGridLayoutManager(瀑布墙,多行,单行)
+        2. LinearLayoutManager(可以定义滚动方向,如横向ListView)
+            + GridLayoutManager(相当于GridView)
 
 	* RecyclerView.ItemAnimator (可以自行扩展的item动画)
 		1. SimpleItemAnimator
@@ -125,7 +277,7 @@
 	* 下拉刷新未调查
 - Toolbar
 
-###V7 cardview library
+###V7 cardview library (方法数 : 728)
 - CardView
 	* CardView继承自FrameLayout，允许你在card视图中显示信息. CardView也可以设置阴影和圆角。
 	* Layout中为CardView设置圆角使用card_view:cardCornerRadius属性
@@ -150,16 +302,20 @@
     </android.support.v7.widget.CardView>
 	```
 
-### 动画(新增的)
+### 动画Transition(过渡动画框架)
 
 #### Touch feedback（触摸反馈）
 波纹效果（Ripple）:
 android:background="?android:attr/selectableItemBackground"波纹有边界
 android:background="?android:attr/selectableItemBackgroundBorderless"波纹超出边界
+*注意：selectableItemBackgroundBorderless是API级别21上的新属性。*
 颜色 :
 android:colorControlHighlight：设置波纹颜色
 android:colorAccent：设置checkbox等控件的选中颜色
 
+
+
+#### Reveal effect（揭露效果）
 Circular Reveal:新增的动画效果
 
 应用ViewAnimationUtils.createCircularReveal()方法可以去创建一个RevealAnimator动画
@@ -170,7 +326,7 @@ Circular Reveal:新增的动画效果
 - startRadius 动画开始半径
 - startRadius 动画结束半径
 
-Activity Transition：(API19)
+#### Activity transitions（Activity转换效果）(API19)需要5.0以上
 
 Activity Transition提供了两种Transition类型：
 Enter（进入）：进入一个Activity的效果
@@ -199,14 +355,212 @@ Window.setSharedElementExitTransition()：共享元素transition的退出效果
 //不同activity之间共享view,接收端
 setTransitionName
 transitionName
+- 共享view 启动activity
 
-#### Reveal effect（揭露效果）
+    ```java
+    private void startActivity(View view,int position) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                // set share element transition animation for current activity
+                Transition ts = new ChangeTransform();
+                ts.setDuration(3000);
+                getWindow().setExitTransition(ts);
+                Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(this,
+                        Pair.create(view, "pic"),
+                        Pair.create((View)fab, "ShareBtn")).toBundle();
 
-#### Activity transitions（Activity转换效果）
+                // start activity with share element transition
+                Intent intent = new Intent(this, ImageSharedActivity.class);
+                intent.putExtra("pos", images[position]);
+                startActivity(intent, bundle);
+    //            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, view, "fab_button");
+            } else {
+                // 小于L版本的,正常启动
+            }
+        }
+
+    ```
+- 被启动的界面
+
+    ``` java
+     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                position = getIntent().getIntExtra("pos", 0);
+                ivPic.setImageResource(position);
+                ivPic.setTransitionName("pic");
+                fab.setTransitionName("ShareBtn");
+            }
+    ```
+
 #### Curved motion（曲线运动）
+
+Material design中的动画依靠曲线，这个曲线适用于时间插值器和控件运动模式。
+
+PathInterpolator类是一个基于贝塞尔曲线(Bézier curve)或路径(Path)对象上的新的插值器。
+
+在materialdesign规范中，系统提供了三个基本的曲线：
+
+
+@interpolator/fast_out_linear_in.xml
+@interpolator/fast_out_slow_in.xml
+@interpolator/linear_out_slow_in.xml
+你可以传递一个PathInterpolator对象给Animator.setInterpolator()方法。
+ObjectAnimator类有了新的构造方法，使你能够一次能同时使用两个或多个属性去绘制动画的路径。例如，下面的动画使用一个Path对象进行视图X和Y属性的动画绘制：
+
+``` java
+ObjectAnimator mAnimator;
+mAnimator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
+...
+mAnimator.start();
+```
+在Android 5.0 提供的API Demos -》Animation/Path Animations 就有一个例子使用了曲线动画：
+
+![图片](http://img.my.csdn.net/uploads/201412/07/1417883797_3321.gif-thumb.jpg)
+
+
 #### View state changes （视图状态改变）
+
+StateListAnimator类可以让你定义动画集，能在view状态改变时工作。下面的实例显示了如何定义一个XML资源的StateListAnimator。
+使用步骤
+
+定义一个XML资源的StateListAnimator
+```xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:state_pressed="true">
+    <set>
+        <objectAnimator android:propertyName="translationZ"
+                        android:duration="@android:integer/config_shortAnimTime"
+                        android:valueTo="10"
+                        android:valueType="floatType"/>
+        <objectAnimator android:propertyName="rotationX"
+                        android:duration="@android:integer/config_shortAnimTime"
+                        android:valueTo="360"
+                        android:valueType="floatType"/>
+
+    </set>
+</item>
+<item
+      android:state_pressed="false"
+      >
+    <set>
+        <objectAnimator android:propertyName="translationZ"
+                        android:duration="10000"
+                        android:valueTo="0"
+                        android:valueType="floatType"/>
+        <objectAnimator android:propertyName="rotationX"
+                        android:duration="@android:integer/config_shortAnimTime"
+                        android:valueTo="0"
+                        android:valueType="floatType"/>
+    </set>
+</item>
+</selector>
+
+```
+
+
+效果如下：
+![图片](http://img.my.csdn.net/uploads/201412/07/1417882950_4605.gif-thumb.jpg)
+
+当你的主题是继承的Material主题，按钮默认有一个Z动画。如果需要避免这个动画，设置android:stateListAnimator属性为@null 即可
+
+AnimatedStateListDrawable类让你去创建drawable资源，该资源在相关联的视图的状态更改时展示动画。一些Android5.0中的系统控件使用这些默认的动画。下面的例子显示了如何定义一个AnimatedStateListDrawable作为XML资源：
+
+```xml
+<!-- res/drawable/myanimstatedrawable.xml -->
+<animated-selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- provide a different drawable for each state-->
+    <item android:id="@+id/pressed" android:drawable="@drawable/drawableP"
+        android:state_pressed="true"/>
+    <item android:id="@+id/focused" android:drawable="@drawable/drawableF"
+        android:state_focused="true"/>
+    <item android:id="@id/default"
+        android:drawable="@drawable/drawableD"/>
+
+<!-- specify a transition -->
+    <transition android:fromId="@+id/default" android:toId="@+id/pressed">
+        <animation-list>
+            <item android:duration="15" android:drawable="@drawable/dt1"/>
+            <item android:duration="15" android:drawable="@drawable/dt2"/>
+            ...
+        </animation-list>
+    </transition>
+    ...
+</animated-selector>
+
+```
 #### Animate Vector Drawables（可绘矢量动画）
 
+可绘制矢量图在拉伸时不会失真。AnimatedVectorDrawable类让你可以在可绘制矢量图上面作用动画。
+
+通常需要在三个xml文件中定义可动的矢量图：
+
+一个矢量图使用<vector>元素,放在res/drawable/下。 
+一个可动的矢量图使用<animated-vector>元素，放在res/drawable/下。 
+一个或更多个动画对象使用<objectAnimator>元素，放在res/anim/下。
+
+可动矢量图可以使用<group>和<path>元素。<group>元素定义一系列路径或者子组，<path>元素定义可绘图的路径。
+
+当你定义了一个想要作用动画的矢量可绘制图，使用android:name属性给每个group和path指定一个唯一的名字，这样你可以从动画的定义中找到他们。比如：
+
+```xml
+<!-- res/drawable/vectordrawable.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:height="64dp"
+    android:width="64dp"
+    android:viewportHeight="600"
+    android:viewportWidth="600">
+    <group
+        android:name="rotationGroup"
+        android:pivotX="300.0"
+        android:pivotY="300.0"
+        android:rotation="45.0" >
+        <path
+            android:name="v"
+            android:fillColor="#000000"
+            android:pathData="M300,70 l 0,-70 70,70 0,0 -70,70z" />
+    </group>
+</vector>
+```
+可动的矢量绘制通过刚刚说到定义的名字，来找到这些path和group：
+
+```xml
+<!-- res/drawable/animvectordrawable.xml -->
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+  android:drawable="@drawable/vectordrawable" >
+    <target
+        android:name="rotationGroup"
+        android:animation="@anim/rotation" />
+    <target
+        android:name="v"
+        android:animation="@anim/path_morph" />
+</animated-vector>
+
+```
+动画的定义表现在ObjectAnimator和AnimatorSet对象中。第一个动画在这个例子中是让目标组旋转360度：
+```xml
+<!-- res/anim/rotation.xml -->
+<objectAnimator
+    android:duration="6000"
+    android:propertyName="rotation"
+    android:valueFrom="0"
+    android:valueTo="360" />
+
+```
+
+第二个动画例子是把矢量可绘图从一个形状变成另一种。所有的路径必须兼容变换：他们必须有相同数量的命令，每个命令要有相同的参数。
+
+```xml
+<!-- res/anim/path_morph.xml -->
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <objectAnimator
+        android:duration="3000"
+        android:propertyName="pathData"
+        android:valueFrom="M300,70 l 0,-70 70,70 0,0   -70,70z"
+        android:valueTo="M300,70 l 0,-70 70,0  0,140 -70,0 z"
+        android:valueType="pathType" />
+</set>
+```
 
 ### 参看
 
@@ -214,6 +568,7 @@ transitionName
 
 ### 资料
 > https://github.com/lightSky/Awesome-MaterialDesign?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io
+> http://blog.csdn.net/ljx19900116/article/details/41806917
 
 > [ANDROID L - Material Design详解（主题和布局）](http://http://www.open-open.com/lib/view/open1416664325648.html)
 
@@ -222,3 +577,5 @@ transitionName
 > [ANDROID L - Material Design详解（UI控件）](http://www.open-open.com/lib/view/open1416664070023.html)
 
 > [ANDROID L - Material Design详解（动画篇）](http://www.open-open.com/lib/view/open1416663769680.html)
+
+> [Material Design 概念介绍](http://www.uisdc.com/comprehensive-material-design-note)

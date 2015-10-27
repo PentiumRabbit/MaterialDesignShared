@@ -1,16 +1,24 @@
 package com.android.materialdesignshared.activity;
 
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.Explode;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.transition.Slide;
 import android.view.Gravity;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 
 import com.android.materialdesignshared.R;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class ContentActivity extends AppCompatActivity {
+
+    @InjectView(R.id.btn_first)
+    Button btnFirst;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,5 +32,17 @@ public class ContentActivity extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content);
+        ButterKnife.inject(this);
+        initView();
+    }
+
+    private void initView() {
+        btnFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(btnFirst, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 }
