@@ -395,9 +395,17 @@ transitionName
 Material design中的动画依靠曲线，这个曲线适用于时间插值器和控件运动模式。
 
 PathInterpolator类是一个基于贝塞尔曲线(Bézier curve)或路径(Path)对象上的新的插值器。
+这个插入器指定了一个1 x1正方形运动曲线，它使用(0,0)为锚点，(1,1)为控制点，作为构造函数的参数
+也可以定义一个path interpolator的xml资源:
+```xml
+<pathInterpolator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:controlX1="0.4"
+    android:controlY1="0"
+    android:controlX2="1"
+    android:controlY2="1"/>
+```
 
 在materialdesign规范中，系统提供了三个基本的曲线：
-
 
 @interpolator/fast_out_linear_in.xml
 @interpolator/fast_out_slow_in.xml
@@ -495,8 +503,8 @@ AnimatedStateListDrawable类让你去创建drawable资源，该资源在相关�
 
 通常需要在三个xml文件中定义可动的矢量图：
 
-一个矢量图使用<vector>元素,放在res/drawable/下。 
-一个可动的矢量图使用<animated-vector>元素，放在res/drawable/下。 
+一个矢量图使用<vector>元素,放在res/drawable/下。
+一个可动的矢量图使用<animated-vector>元素，放在res/drawable/下。
 一个或更多个动画对象使用<objectAnimator>元素，放在res/anim/下。
 
 可动矢量图可以使用<group>和<path>元素。<group>元素定义一系列路径或者子组，<path>元素定义可绘图的路径。
@@ -561,6 +569,36 @@ AnimatedStateListDrawable类让你去创建drawable资源，该资源在相关�
         android:valueType="pathType" />
 </set>
 ```
+
+### 官网提供的新布局(M):百分比布局支持库(方法数101)
+- Percent Support Library: Bring dimension in % to RelativeLayout and FrameLayout
+百分比支持库是随着 Android Support Library 23 一起的发布的
+现在，在使用老的 RelativeLayout 和 FrameLayout 做替换，只需要简单的将他们各自切换到 android.support.percent.PercentRelativeLayout 和 android.support.percent.PercentFrameLayout。这里有9个布局参数可以使用：
+layout_widthPercent : 用百分比来表示宽度，比如：app:layout_widthPercent="25%"
+layout_heightPercent : 用百分比来表示高度
+layout_marginPercent : 用百分比来表示 Margin
+其余的是用百分比来表示每个 margin 面
+layout_marginLeftPercent,
+layout_marginRightPercent,
+layout_marginTopPercent,
+layout_marginBottomPercent,
+layout_marginStartPercent,
+layout_marginEndPercent
+
+```xml
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        app:layout_widthPercent="25%"
+        android:layout_height="100dp"
+        app:layout_marginLeftPercent="5%"
+        android:background="#ff0000" />
+</android.support.percent.PercentRelativeLayout>
+
+```
+
 
 ### 参看
 

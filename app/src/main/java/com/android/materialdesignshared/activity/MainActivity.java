@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.android.materialdesignshared.R;
 import com.android.materialdesignshared.fragment.MainPagerAdapter;
@@ -25,7 +26,7 @@ import butterknife.InjectView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    
+
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
     @InjectView(R.id.tabs_title)
@@ -53,7 +54,12 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
+                        .setAction("Action", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(MainActivity.this, "你好!!!", Toast.LENGTH_SHORT).show();
+                            }
+                        }).show();
             }
         });
 
@@ -74,7 +80,7 @@ public class MainActivity extends AppCompatActivity
         tabsTitle.addTab(tabsTitle.newTab().setText("第一个"), false);//添加 Tab,默认选中
 
     }
-    
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -84,49 +90,49 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-        
+
         return super.onOptionsItemSelected(item);
     }
-    
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        
+
         if (id == R.id.nav_camara) {
-            startActivity(new Intent(this,ToolbarCollapseActivity.class));
+            startActivity(new Intent(this, ToolbarCollapseActivity.class));
         } else if (id == R.id.nav_gallery) {
-            startActivity(new Intent(this,SharedActivity.class));
+            startActivity(new Intent(this, SharedActivity.class));
         } else if (id == R.id.nav_slideshow) {
-            startActivity(new Intent(this,ViewTransitionActivity.class));
+            startActivity(new Intent(this, ViewTransitionActivity.class));
         } else if (id == R.id.nav_manage) {
-            startActivity(new Intent(this,WightActivity.class));
+            startActivity(new Intent(this, WightActivity.class));
         } else if (id == R.id.nav_share) {
-            
+
         } else if (id == R.id.nav_send) {
-            
+
         }
-        
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

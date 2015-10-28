@@ -41,14 +41,14 @@ public class ViewTransitionActivity extends AppCompatActivity {
         ButterKnife.inject(this);
         initView();
     }
+
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private void initView() {
         setSupportActionBar(toolbar);
-        ViewGroup container = (ViewGroup)findViewById(R.id.ll_content);
+        ViewGroup container = (ViewGroup) findViewById(R.id.ll_content);
         TransitionInflater transitionInflater = TransitionInflater.from(this);
         TransitionManager transitionManager = transitionInflater.inflateTransitionManager(
                 R.transition.transition_manager, container);
-
         scene = Scene.getSceneForLayout(container,
                 R.layout.activity_content, this);
     }
@@ -56,20 +56,24 @@ public class ViewTransitionActivity extends AppCompatActivity {
     @OnClick(R.id.btn_explore)
     void exploreActivity() {
 //        goToScene(scene);
-//        startActivity(new Intent(this, ContentActivity.class));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startActivity(new Intent(this, ExplodeActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @OnClick(R.id.btn_slide)
     void slideActivity() {
-        Intent intent=new Intent(this, ContentActivity.class);
-        startActivity(intent,
-                ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startActivity(new Intent(this, SlideActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        }
     }
 
     @OnClick(R.id.btn_fade)
     void fadeActivity() {
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startActivity(new Intent(this, FadeActivity.class), ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        }
     }
 
 

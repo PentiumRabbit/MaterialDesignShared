@@ -15,7 +15,7 @@ import com.android.materialdesignshared.R;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class ContentActivity extends AppCompatActivity {
+public class SlideActivity extends AppCompatActivity {
 
     @InjectView(R.id.btn_first)
     Button btnFirst;
@@ -26,7 +26,7 @@ public class ContentActivity extends AppCompatActivity {
             // inside your activity (if you did not enable transitions in your theme)
             getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
             // set an enter transition
-            getWindow().setEnterTransition(new Slide(Gravity.END));
+            getWindow().setEnterTransition(new Slide(Gravity.END).setDuration(3000));
             // set an exit transition
 //            getWindow().setExitTransition(new Explode());
         }
