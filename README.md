@@ -413,12 +413,41 @@ PathInterpolator类是一个基于贝塞尔曲线(Bézier curve)或路径(Path)�
 你可以传递一个PathInterpolator对象给Animator.setInterpolator()方法。
 ObjectAnimator类有了新的构造方法，使你能够一次能同时使用两个或多个属性去绘制动画的路径。例如，下面的动画使用一个Path对象进行视图X和Y属性的动画绘制：
 
+yid
 ``` java
-ObjectAnimator mAnimator;
-mAnimator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
-...
-mAnimator.start();
+			ObjectAnimator mAnimator;
+				Path path = new Path();
+				path.moveTo(iv_path.getLeft(), iv_path.getTop());
+				path.lineTo(100, 800);
+				path.lineTo(800, 800);
+				path.lineTo(iv_path.getLeft(), iv_path.getTop());
+
+//				PathInterpolator interpolator = new PathInterpolator(0.1f, 0.1f, 0.8f, 0.8f);
+				Interpolator interpolator = mInterpolators[mInterpolatorSpinner.getSelectedItemPosition()];
+				mAnimator = ObjectAnimator.ofFloat(iv_path, View.X, View.Y, path );
+
+				mAnimator.setDuration(3000);
+				mAnimator.setInterpolator(interpolator);
+				mAnimator.start();
 ```
+
+放大缩小
+```java
+		mPathIn = new Path();
+        mPathIn.moveTo(0.2f, 0.2f);
+        mPathIn.lineTo(1f, 1f);
+
+        // Path for 'out' animation: shrinking from 100% to 20%
+        mPathOut = new Path();
+        mPathOut.moveTo(1f, 1f);
+        mPathOut.lineTo(0.2f, 0.2f);
+
+     ObjectAnimator animator = ObjectAnimator.ofFloat(mView, View.SCALE_X, View.SCALE_Y, path);
+
+```
+
+
+
 在Android 5.0 提供的API Demos -》Animation/Path Animations 就有一个例子使用了曲线动画：
 
 ![图片](http://img.my.csdn.net/uploads/201412/07/1417883797_3321.gif-thumb.jpg)
@@ -604,7 +633,6 @@ layout_marginEndPercent
 
 > http://www.open-open.com/lib/view/open1436152483833.html
 
-### 资料
 > https://github.com/lightSky/Awesome-MaterialDesign?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io
 > http://blog.csdn.net/ljx19900116/article/details/41806917
 
