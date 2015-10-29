@@ -4,6 +4,14 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="background_card">#fff</color>
+    <color name="primary_material_light">#2a8ab6</color>
+    <color name="background_material_light">#cec9c9</color>
+    <color name="foreground_material_light">#2d523a</color>
+    <color name="black">#bc2424</color>
+    <color name="accent_material_light">#129d90</color>
+    <color name="statusBarColor">#cf4e4e</color>
+    <color name="primary_text_default_material_light">#de2e5e7a</color>
+    <color name="White">#1f0f0f</color>
 
 
     <array name="note_neutral_colors">

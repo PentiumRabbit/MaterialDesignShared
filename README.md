@@ -6,10 +6,64 @@
 ## 说明
 该项目用于材料设计学习，分享
 
+## 主题
+
+### 兼容
+- 兼容低版本继承V7中的Theme.AppCompat
+- API 21 以上继承系统自带的android:Theme.Material
+
+### 样式配置
+- 如图
+![颜色值](http://static.open-open.com/lib/uploadImg/20141020/20141020103739_134.png)
+
+```xml
+
+<!-- 默认标题的颜色-->
+        <item name="android:textColorPrimary">@color/CommonText</item>
+
+        <!--默认字体颜色-->
+        <item name="android:textColor">@color/Black</item>
+
+        <!--  colorControlNormal则是应用在图标上-->
+        <item name="colorControlNormal">@color/CommonText</item>
+        <!-- 还可以设置 colorControlNormal, colorControlActivated colorControlHighlight, 和 colorSwitchThumbNormal 的值来控制控件的颜色. -->
+        <item name="colorControlHighlight">@color/LightSalmon</item>
+
+        <!--<item name="android:colorControlActivated">@color/PeachPuff</item>-->
+
+
+        <item name="android:textColorSecondary">@color/CommonText</item>
+        <!--actionbar颜色-->
+        <!--colorPrimary（原色）：它作为应用的主要色调，一般是操作栏和最近任务的背景色。-->
+        <item name="colorPrimary">@color/CommonTitle</item>
+        <!--状态栏颜色,仅在Lollipop以上机器生效-->
+        <!--color Primary Dark（色原变暗）：原色的变暗色调，应用在状态栏上。-->
+        <item name="colorPrimaryDark">@color/CommonTitle</item>
+        <!--按钮下划线颜色-->
+        <!--colorAccent（色彩突显）：它是原色的强调色彩，应用在框架控制上,CheckBox 选中等。-->
+        <item name="colorAccent">@color/CommonButton</item>
+        <!--屏幕背景色-->
+        <item name="android:windowBackground">@color/White</item>
+        <item name="actionBarStyle">@style/ActionBar</item>
+
+        <!--这里是定义系统默认actionbar的地方,自己写的需要在actionbar中自己声明,还有PopMenu-->
+        <!--<item name="android:actionBarStyle">@style/ActionBar</item>-->
+
+        <!--取除左上角背景 Home区域-->
+        <item name="selectableItemBackground">@null</item>
+
+
+        <!--底部3个按键栏的颜色,5.1以上可用-->
+        <!--<item name="android:navigationBarColor">@color/Violet</item>-->
+        <!-- translucent system bars -->
+
+```
+
 ## 库介绍
 
 ### support design (方法数 2126)
 
+位置 : ~/android-sdk-linux/extras/android/support/design
 
 + EditText
 + Spinner
@@ -209,6 +263,8 @@
 #### ToolBar
 - 将ToolBar作为ActionBar来使用
 
+	![ToolBar](http://www.jcodecraeer.com/uploads/20141118/1416285884351.png)
+
 #### CollapsingToolbarLayout
 
 - 让 Toolbar 折叠起来
@@ -265,6 +321,9 @@ public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {
 ```
 
 ###V7 Recyclerview Lib ( 方法数 2119)
+
+位置 ~/android-sdk-linux/extras/android/support/v7/recyclerview
+
 - RecyclerView ListView的升级版
 	* RecyclerView.LayoutManager (可以自行定义list的类型)
         1. StaggeredGridLayoutManager(瀑布墙,多行,单行)
@@ -278,6 +337,9 @@ public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {
 - Toolbar
 
 ###V7 cardview library (方法数 : 728)
+
+位置 ~/android-sdk-linux/extras/android/support/v7/cardview
+
 - CardView
 	* CardView继承自FrameLayout，允许你在card视图中显示信息. CardView也可以设置阴影和圆角。
 	* Layout中为CardView设置圆角使用card_view:cardCornerRadius属性
@@ -526,9 +588,13 @@ AnimatedStateListDrawable类让你去创建drawable资源，该资源在相关�
 </animated-selector>
 
 ```
-#### Animate Vector Drawables（可绘矢量动画）
+#### Animate Vector Drawables（可绘矢量动画SVG）
 
+SVG的全称是Scalable Vector Graphics，叫可缩放矢量图形。它和位图（Bitmap）相对，SVG不会像位图一样因为缩放而让图片质量下降。
+(骨头太大,暂时啃不动,找时间专研,下面的我没验证,只是复制过来的)
 可绘制矢量图在拉伸时不会失真。AnimatedVectorDrawable类让你可以在可绘制矢量图上面作用动画。
+
+![SVG](http://img.blog.csdn.net/20150330001521473?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdGlhbmppYW40NTky/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 
 通常需要在三个xml文件中定义可动的矢量图：
 
@@ -598,6 +664,8 @@ AnimatedStateListDrawable类让你去创建drawable资源，该资源在相关�
         android:valueType="pathType" />
 </set>
 ```
+
+[附上一个链接介绍](http://lvable.com/?p=104)
 
 ### 官网提供的新布局(M):百分比布局支持库(方法数101)
 - Percent Support Library: Bring dimension in % to RelativeLayout and FrameLayout
