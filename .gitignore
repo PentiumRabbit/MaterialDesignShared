@@ -5,6 +5,7 @@
 /captures
 /.idea
 
+*.iml
 # Built application files
 *.apk
 *.ap_
