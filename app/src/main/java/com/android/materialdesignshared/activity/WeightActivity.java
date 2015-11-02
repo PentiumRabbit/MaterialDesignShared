@@ -70,20 +70,5 @@ public class WeightActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * create CircularReveal animation
-     */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public Animator createAnimation(View v) {
-        // create a CircularReveal animation
-        Animator animator = ViewAnimationUtils.createCircularReveal(
-                v,
-                v.getWidth() / 2,
-                v.getHeight() / 2,
-                0,
-                v.getWidth());
-        animator.setInterpolator(new AccelerateDecelerateInterpolator());
-        animator.setDuration(500);
-        return animator;
-    }
+
 }

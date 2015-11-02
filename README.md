@@ -366,6 +366,24 @@ public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {
 
 ### 动画Transition(过渡动画框架)
 
+
+#### 视图剪切
+
+裁剪视图功能，可以让你更容易的改变视图的形状。你可以裁剪视图为了和其他的设计元素保持一致，或者改变成形状响应用户的输入。你可以裁剪一个视图的轮廓使用View.setClipToOutLine()方法，或者android:clipToOutline属性。只有矩形，圆角矩形，圆圈的轮廓支持被裁剪，可以使用Outline.canClip()方法检测是否支持被裁剪。
+
+```java
+   ViewOutlineProvider viewOutlineProvider1 = new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+
+                outline.setRoundRect(0, 0, view.getWidth() , view.getHeight(), view.getHeight() / 2);
+            }
+        };
+
+        tvClip.setClipToOutline(true);
+		tvClip.setOutlineProvider(viewOutlineProvider1);
+```
+
 #### Touch feedback（触摸反馈）
 波纹效果（Ripple）:
 android:background="?android:attr/selectableItemBackground"波纹有边界

@@ -13,4 +13,5 @@
     <string name="title_activity_image_shared">ImageSharedActivity</string>
     <string name="title_activity_view_transition">ViewTransitionActivity</string>
     <string name="title_activity_wight">WightActivity</string>
+    <string name="title_activity_clip_view">ClipViewActivity</string>
 </resources>
