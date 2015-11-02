@@ -714,7 +714,7 @@ layout_marginEndPercent
 
 ```
 
-### Support Palette 调色板(方法数)
+### Support Palette 调色板(方法数182)
 Palette有两种使用方法，分别是
 - 同步的
 - 异步的
