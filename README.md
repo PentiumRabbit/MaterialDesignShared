@@ -696,6 +696,55 @@ layout_marginEndPercent
 
 ```
 
+### Support Palette 调色板(方法数)
+Palette有两种使用方法，分别是
+- 同步的
+- 异步的
+
+同步方法
+
+```java
+public static Palette generate(Bitmap bitmap)
+public static Palette generate(Bitmap bitmap, int numColors)
+```
+
+使用这个方法得保证你有访问和图片加载有关的线程
+该方法使用默认的颜色位数（DEFAULT_CALCULATE_NUMBER_COLORS=16），我们可以使用两个参数的方法指
+异步方法
+
+```java
+public static AsyncTask<Bitmap, Void, Palette> generateAsync(Bitmap bitmap, PaletteAsyncListener listener)
+public static AsyncTask<Bitmap, Void, Palette> generateAsync( final Bitmap bitmap, final int numColors, final PaletteAsyncListener listener)
+
+两个方法的区别和同步的两个方法区别是一样的，这两个方法是异步的，使用时需要传入一个监听器，该监听器的原型是
+
+public interface PaletteAsyncListener {
+/** * Called when the {@link Palette} has been generated. */
+ void onGenerated(Palette palette);
+ }
+
+```
+
+Palette 的属性
+
+Palette.Swatch是一个提取颜色的样本，通过该类可以提取到包含了我们需要的颜色内容
+
+- 返回一个有活力的颜色. Palette.getVibrantSwatch()
+- 返回一个有活力的暗色. Palette.getDarkVibrantSwatch()
+- 返回一个有活力的亮色. Palette.getLightVibrantSwatch()
+- 返回一个柔和的颜色. Palette.getMutedSwatch()
+- 返回一个柔和的暗色. Palette.getDarkMutedSwatch()
+- 返回一个柔和的亮色. Palette.getLightMutedSwatch()
+- 有活力的颜色和有活力的暗色是开发者使用最多的，具体使用哪一种取决于你自己
+
+Swatch 属性
+
+- getPopulation(): 返回被该样本代表的像素的总数
+- getRgb(): 返回一个 RGB 颜色值
+- getHsl(): 返回一个 HSL颜色值.
+- getBodyTextColor(): 返回一个适合做内容体颜色的颜色值
+- getTitleTextColor(): 返回一个适合做标题颜色的颜色值
+标题的文本颜色会趋向于高透明度和低对比度，字体也会应该大一点，body的文本颜色会趋向于高不透明度和高对比度。
 
 ### 参看
 
