@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_share) {
             startActivity(new Intent(this, ClipViewActivity.class));
         } else if (id == R.id.nav_send) {
-
+            startActivity(new Intent(this, PathInterpolatorCompatActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

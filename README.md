@@ -476,16 +476,24 @@ transitionName
 
 Material design中的动画依靠曲线，这个曲线适用于时间插值器和控件运动模式。
 
+Interpolator: 我理解为就是加速度变化曲线
+
 PathInterpolator类是一个基于贝塞尔曲线(Bézier curve)或路径(Path)对象上的新的插值器。
 这个插入器指定了一个1 x1正方形运动曲线，它使用(0,0)为锚点，(1,1)为控制点，作为构造函数的参数
 也可以定义一个path interpolator的xml资源:
-```xml
-<pathInterpolator xmlns:android="http://schemas.android.com/apk/res/android"
-    android:controlX1="0.4"
-    android:controlY1="0"
-    android:controlX2="1"
-    android:controlY2="1"/>
-```
+
+    ```xml
+    <pathInterpolator xmlns:android="http://schemas.android.com/apk/res/android"
+        android:controlX1="0.4"
+        android:controlY1="0"
+        android:controlX2="1"
+        android:controlY2="1"/>
+    ```
+
+    ``` java
+     Interpolator interpolator = new AnimationUtils().loadInterpolator(getActivity(),
+                            android.R.interpolator.linear)
+    ``` 
 
 在materialdesign规范中，系统提供了三个基本的曲线：
 
@@ -495,7 +503,7 @@ PathInterpolator类是一个基于贝塞尔曲线(Bézier curve)或路径(Path)�
 你可以传递一个PathInterpolator对象给Animator.setInterpolator()方法。
 ObjectAnimator类有了新的构造方法，使你能够一次能同时使用两个或多个属性去绘制动画的路径。例如，下面的动画使用一个Path对象进行视图X和Y属性的动画绘制：
 
-yid
+移动
 ``` java
 			ObjectAnimator mAnimator;
 				Path path = new Path();
@@ -527,8 +535,16 @@ yid
      ObjectAnimator animator = ObjectAnimator.ofFloat(mView, View.SCALE_X, View.SCALE_Y, path);
 
 ```
-
-
+贝塞尔曲线
+```java
+        // Path for 'out' animation: shrinking from 100% to 20%
+        mPathOut = new Path();
+        mPathOut.moveTo(1f, 1f);
+        mPathOut.lineTo(0.2f, 0.2f);
+        
+        //画一条贝塞尔曲线，参数依次为：控制点的x坐标，控制点的y坐标，结束点的x坐标，结束点的y坐标
+//        mPath.quadTo(100, 400, 300, 300);
+```
 
 在Android 5.0 提供的API Demos -》Animation/Path Animations 就有一个例子使用了曲线动画：
 

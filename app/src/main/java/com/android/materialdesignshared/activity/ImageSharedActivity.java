@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.ChangeClipBounds;
 import android.transition.ChangeImageTransform;
+import android.transition.ChangeScroll;
 import android.transition.ChangeTransform;
 import android.transition.Explode;
 import android.transition.Transition;

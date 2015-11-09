@@ -14,4 +14,7 @@
     <string name="title_activity_view_transition">ViewTransitionActivity</string>
     <string name="title_activity_wight">WightActivity</string>
     <string name="title_activity_clip_view">ClipViewActivity</string>
+    <string name="title_activity_path_interpolator_compat">PathInterpolatorCompatActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>
