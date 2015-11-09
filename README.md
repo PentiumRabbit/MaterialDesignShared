@@ -478,6 +478,10 @@ Material design中的动画依靠曲线，这个曲线适用于时间插值器�
 
 Interpolator: 我理解为就是加速度变化曲线
 
+[想了解变化曲线的可以看一下这里](http://blog.csdn.net/qiujuer/article/details/42430269)
+
+![变化曲线](http://img.blog.csdn.net/20150105215217967?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcWl1anVlcg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
 PathInterpolator类是一个基于贝塞尔曲线(Bézier curve)或路径(Path)对象上的新的插值器。
 这个插入器指定了一个1 x1正方形运动曲线，它使用(0,0)为锚点，(1,1)为控制点，作为构造函数的参数
 也可以定义一个path interpolator的xml资源:
