@@ -26,7 +26,8 @@ public class SlideActivity extends AppCompatActivity {
             // inside your activity (if you did not enable transitions in your theme)
             getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
             // set an enter transition
-            getWindow().setEnterTransition(new Slide(Gravity.END).setDuration(3000));
+            // 用END在联想的手机上报错,尼玛
+            getWindow().setEnterTransition(new Slide(Gravity.RIGHT).setDuration(3000));
             // set an exit transition
 //            getWindow().setExitTransition(new Explode());
         }
