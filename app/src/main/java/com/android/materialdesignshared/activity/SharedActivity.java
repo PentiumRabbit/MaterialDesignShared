@@ -78,10 +78,10 @@ public class SharedActivity extends AppCompatActivity implements AdapterView.OnI
     private void startActivity(View view,int position) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             // set share element transition animation for current activity
-//            Transition ts = new ChangeTransform();
-//            ts.setDuration(3000);
-//            ts.setStartDelay(1000);
-//            getWindow().setExitTransition(ts);
+            Transition ts = new ChangeTransform();
+            ts.setDuration(3000);
+            ts.setStartDelay(1000);
+            getWindow().setExitTransition(ts);
             Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(this,
                     Pair.create(view, "pic"),
                     Pair.create((View)fab, "ShareBtn")).toBundle();
