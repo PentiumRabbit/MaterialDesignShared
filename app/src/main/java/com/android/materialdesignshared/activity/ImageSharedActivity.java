@@ -7,7 +7,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.ChangeClipBounds;
+import android.transition.ChangeImageTransform;
+import android.transition.ChangeTransform;
 import android.transition.Explode;
+import android.transition.Transition;
 import android.util.LayoutDirection;
 import android.view.Gravity;
 import android.view.View;
@@ -39,9 +43,15 @@ public class ImageSharedActivity extends AppCompatActivity {
             // inside your activity (if you did not enable transitions in your theme)
             getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
             // set an enter transition
-            getWindow().setEnterTransition(new Explode());
+//            getWindow().setEnterTransition(new Explode());
             // set an exit transition
 //            getWindow().setExitTransition(new Explode());
+
+            Transition ts = new ChangeImageTransform();
+            ts.setDuration(3000);
+            ts.setStartDelay(1000);
+            getWindow().setSharedElementEnterTransition(ts);
+
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_shared);

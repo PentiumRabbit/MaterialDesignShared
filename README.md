@@ -237,6 +237,7 @@
     ```
 
 - 设置错误信息
+
     ```java
        	EditText et_content = tilName.getEditText();
             tilName.setHint("请输入用户名");
@@ -268,12 +269,11 @@
 #### CollapsingToolbarLayout
 
 - 让 Toolbar 折叠起来
+    `app:layout_collapseParallaxMultiplier="0.7"` == 设置背景图片滚动偏移的量 ==
 - Toolbar中不需要 layout_scrollFlags
-	
-    `app:layout_collapseParallaxMultiplier="0.7"` == 设置偏移 ==
     `app:layout_collapseMode="pin"`
     - parallax, 表示滚动过程中,会一直保持可见区域在正中间,配合layout_collapseParallaxMultiplier
-    - pin, 表示不会被滚出屏幕范围
+    - pin, 表示title不会被滚出屏幕范围,被压缩
     - app:layout_collapseParallaxMultiplier和CollapsingToolbarLayout的app:contentScrim=”?attr/colorPrimary”结合使用，结果就是在视图折叠时，添加了一个纱布效果
 
 
@@ -295,6 +295,12 @@
 - ListView 类也是和 CoordinatorLayout 不能协同工作的。只有RecyclerView可以
 
 - 可以自行定义FloatingActionButton隐藏的动作
+
+```xml
+<android.support.design.widget.FloatingActionButton
+    app:layout_behavior="com.codepath.floatingactionbuttontest.ScrollAwareFABBehavior" />
+```
+
 ``` java
 public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {
     // ...
@@ -314,10 +320,6 @@ public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {
 
     // ...
 }
-```
-```xml
-<android.support.design.widget.FloatingActionButton
-    app:layout_behavior="com.codepath.floatingactionbuttontest.ScrollAwareFABBehavior" />
 ```
 
 ###V7 Recyclerview Lib ( 方法数 2119)
@@ -418,6 +420,9 @@ Exit（退出）：退出一个Activity的效果
 	+ explode：从场景的中心移入或移出
 	+ slide：从场景的边缘移入或移出
 	+ fade：调整透明度产生渐变效果
+	
+    Window.setEnterTransition()：普通transition的进入效果
+    Window.setExitTransition()：普通transition的退出效果
 
 - Shared Elements Transition 共享元素转换：它的作用就是共享两个acitivity种共同的元素，在Android 5.0下支持如下效果：
 	+ changeBounds -  改变目标视图的布局边界
@@ -425,12 +430,9 @@ Exit（退出）：退出一个Activity的效果
 	+ changeTransform - 改变目标视图的缩放比例和旋转角度
 	+ changeImageTransform - 改变目标图片的大小和缩放比例
 
-
-Window.setEnterTransition()：普通transition的进入效果
-Window.setExitTransition()：普通transition的退出效果
-Window.setSharedElementEnterTransition()：共享元素transition的进入效果
-Window.setSharedElementExitTransition()：共享元素transition的退出效果
-在setContentView之前
+    Window.setSharedElementEnterTransition()：共享元素transition的进入效果
+    Window.setSharedElementExitTransition()：共享元素transition的退出效果
+    在setContentView之前
 
 //不同activity之间共享view,接收端
 setTransitionName
