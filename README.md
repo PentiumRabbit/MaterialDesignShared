@@ -88,6 +88,8 @@
 
 #### FloatingActionButton
 
+在材料设计中,引进Z轴概念,Z的高度(elevation+TranslationZ)决定阴影的大小
+    
 - app:fabSize="normal"是用来定义 FAB 的大小的（推荐 40dp 的清晰的 png 文件）
     * normal的意思是在大多数情况下标准尺寸为 56dp 的按钮
     * mini是另一个选择，它的大小将变成 40dp
