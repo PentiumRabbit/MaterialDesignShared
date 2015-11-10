@@ -48,10 +48,10 @@ public class ImageSharedActivity extends AppCompatActivity {
             // set an exit transition
 //            getWindow().setExitTransition(new Explode());
 
-            Transition ts = new ChangeImageTransform();
-            ts.setDuration(3000);
-            ts.setStartDelay(1000);
-            getWindow().setSharedElementEnterTransition(ts);
+//            Transition ts = new ChangeImageTransform();
+//            ts.setDuration(3000);
+//            ts.setStartDelay(1000);
+//            getWindow().setSharedElementEnterTransition(ts);
 
         }
         super.onCreate(savedInstanceState);
